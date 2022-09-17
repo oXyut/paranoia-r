@@ -15,22 +15,27 @@ const SmallFontBox = styled(Box)(({ theme }) => ({
   fontSize: 14,
 }))
 
+
+
 const ViewCoreInformation = (props) => {
   // console.log(props);
   const CoreInformation = props.info;
 
     return (
       <>
-      <Accordion defaultExpanded={true}>
+      <Accordion defaultExpanded={true} variant="outlined">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
+          // sx={{border:1}}
         >
-          <h3>PART1 CORE INFORMATION</h3>
+          <Typography component="h3" variant="h6">
+            PART1 CORE INFORMATION
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ flexGrow: 1 }}>
+          {/* <Box sx={{ flexGrow: 1 }}> */}
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
               <UnderlinedBox name={"キャラクター名"} value={CoreInformation.name} />
@@ -47,13 +52,13 @@ const ViewCoreInformation = (props) => {
               <UnderlinedBox name={"性別"} value={CoreInformation.sex} />
             </Grid>
             <Grid xs={6}>
-              <UnderlinedBox name={"性格"} value={CoreInformation.personality.join(", ")} />
+              <UnderlinedBox name={"性格"} value={CoreInformation.personality.join(",　")} />
             </Grid>
             <Grid xs={2}>
               <UnderlinedBox name={"クローンナンバー"} value={CoreInformation.number} />
             </Grid>
           </Grid>
-        </Box>
+        {/* </Box> */}
         </AccordionDetails>
       </Accordion>
 

@@ -20,91 +20,80 @@ const SmallFontBox = styled(Box)(({ theme }) => ({
 // 反逆スターとXPポイントを下に寄せてそろえたいがやり方がわからない
 const ViewSkills = (props) => {
   // console.log(props);
-  const Development = props.info;
+  const Skills = props.info;
 
     return (
       <>
-      <Accordion defaultExpanded={true}>
+      <Accordion defaultExpanded={true} variant="outlined">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <h3>PART2 DEVELOPMENT</h3>
+        <Typography component="h3" variant="h6">
+          PART3 SKILLS
+        </Typography>
+
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ flexGrow: 1 }}>
+          {/* <Box sx={{ flexGrow: 1 }}> */}
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"運動"} value={Development.Stats.violence} />
+              <UnderlinedBox name={"運動"} value={Skills.Violence.athletics[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"科学"} value={Development.Stats.brains} />
+              <UnderlinedBox name={"科学"} value={Skills.Brains.science[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"ごまかし"} value={Development.Stats.chutzpah} />
+              <UnderlinedBox name={"ごまかし"} value={Skills.Chutzpah.bluff[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"操作"} value={Development.Stats.mechanics} />
+              <UnderlinedBox name={"操作"} value={Skills.Mechanics.operate[0]} />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"暴力"} value={Development.Stats.violence} />
+              <UnderlinedBox name={"銃器"} value={Skills.Violence.guns[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"知力"} value={Development.Stats.brains} />
+              <UnderlinedBox name={"心理学"} value={Skills.Brains.psychology[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah} />
+              <UnderlinedBox name={"魅惑"} value={Skills.Chutzpah.charm[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics} />
+              <UnderlinedBox name={"機械操作"} value={Skills.Mechanics.engineer[0]} />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"暴力"} value={Development.Stats.violence} />
+              <UnderlinedBox name={"接近戦"} value={Skills.Violence.melee[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"知力"} value={Development.Stats.brains} />
+              <UnderlinedBox name={"官僚主義"} value={Skills.Brains.bureaucracy[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah} />
+              <UnderlinedBox name={"威圧"} value={Skills.Chutzpah.intimidate[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics} />
+              <UnderlinedBox name={"プログラム"} value={Skills.Mechanics.program[0]} />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"暴力"} value={Development.Stats.violence} />
+              <UnderlinedBox name={"巧投"} value={Skills.Violence.throw[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"知力"} value={Development.Stats.brains} />
+              <UnderlinedBox name={"アルファコンプレックス"} value={Skills.Brains.alpha_complex[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah} />
+              <UnderlinedBox name={"秘密行動"} value={Skills.Chutzpah.stealth[0]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics} />
+              <UnderlinedBox name={"爆破"} value={Skills.Mechanics.demolitions[0]} />
             </Grid>
           </Grid>
-          <Grid container spacing={1} sx={{margin: 1}}>
-            <Grid xs>
-              <UnderlinedBox name={"暴力"} value={Development.Stats.violence} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"知力"} value={Development.Stats.brains} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics} />
-            </Grid>
-          </Grid>
-        </Box>
+        {/* </Box> */}
         </AccordionDetails>
       </Accordion>
 

@@ -88,7 +88,7 @@ export default function SearchAppBar() {
             <a href="/">
               <img src={`/paranoia-logo.svg`} alt="logo" width="60" href=""/>
             </a>
-              <Box sx={{marginLeft:5}}>Paranoia-R</Box>
+              <Typography variant="h5" sx={{marginLeft:5}}>Paranoia-R</Typography>
           <div style={{ flexGrow: 1 }}></div>
           <Search>
             <SearchIconWrapper>

@@ -9,6 +9,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from '@mui/material/Rating';
+import { FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 
 import UnderlinedBox from './UnderlinedBox';
 
@@ -16,11 +17,9 @@ const SmallFontBox = styled(Box)(({ theme }) => ({
   fontSize: 14,
 }))
 
-
-// 反逆スターとXPポイントを下に寄せてそろえたいがやり方がわからない
-const ViewDevelopment = (props) => {
+const ViewWellbeing = (props) => {
   // console.log(props);
-  const Development = props.info;
+  const Wellbeing = props.info;
 
     return (
       <>
@@ -31,40 +30,31 @@ const ViewDevelopment = (props) => {
           id="panel1a-header"
         >
         <Typography component="h3" variant="h6">
-          PART2 DEVELOPMENT
+          PART4 WELLBEING
         </Typography>
 
         </AccordionSummary>
         <AccordionDetails>
           {/* <Box sx={{ flexGrow: 1 }}> */}
+            <Box sx={{margin:1, borderBottom:1, textAlign:"center"}}>
+              <SmallFontBox>気力</SmallFontBox>
+              <Rating name="read-only" value={Wellbeing.moxie[0]} max={Wellbeing.moxie[1]} readOnly />
+            </Box>
+            <Box sx={{margin:1, borderBottom:1, textAlign:"center"}}>
+              <SmallFontBox>ダメージ</SmallFontBox>
+              <Grid container>
+                <Grid xs><FormControlLabel label="軽傷" control={<Checkbox  checked={Wellbeing.Wounds.hurt} />}  /></Grid>
+                <Grid xs><FormControlLabel label="重傷" control={<Checkbox  checked={Wellbeing.Wounds.injured} />}  /></Grid>
+                <Grid xs><FormControlLabel label="瀕死" control={<Checkbox  checked={Wellbeing.Wounds.maimed} />}  /></Grid>
+                <Grid xs><FormControlLabel label="死亡" control={<Checkbox  checked={Wellbeing.Wounds.dead} />}  /></Grid>
+              </Grid>
+            </Box>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
               <Box sx={{borderBottom:1, textAlign:"center"}}>
-                <SmallFontBox>反逆スター</SmallFontBox>
-                <Rating name="read-only" value={Development.star} readOnly />
+                <SmallFontBox>メモリー</SmallFontBox>
+                <Typography>{Wellbeing.memory}</Typography>
               </Box>
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"XPポイント"} value={Development.xp+" xp"} />
-            </Grid>
-          </Grid>
-
-          <Typography component="h3" variant="subtitle1">
-            STATS
-          </Typography>
-
-          <Grid container spacing={1} sx={{margin: 1}}>
-            <Grid xs>
-              <UnderlinedBox name={"暴力"} value={Development.Stats.violence} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"知力"} value={Development.Stats.brains} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics} />
             </Grid>
           </Grid>
         {/* </Box> */}
@@ -75,4 +65,4 @@ const ViewDevelopment = (props) => {
     );
 }
 
-export default ViewDevelopment;
+export default ViewWellbeing;

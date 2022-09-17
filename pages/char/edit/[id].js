@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
-import EditCoreInformation from "../../../components/EditCoreInformation";
-import SearchAppBar from "../../../components/SearchAppBar";
+import EditCoreInformation from "../../../src/components/EditCoreInformation";
+import SearchAppBar from "../../../src/components/SearchAppBar";
+import { NextLinkComposed } from "../../../src/components/NextLinkComposed";
 
 const CharacterEdit = () => {
 
@@ -17,13 +18,15 @@ const CharacterEdit = () => {
 
             <EditCoreInformation/>
 
-            <a href={"/char/view/"+id}>
             <Button
+                component={NextLinkComposed}
+                to={{
+                    pathname: "/char/view/"+id
+                }}
                 variant="contained"
             >
                 閲覧モードへ
             </Button>
-            </a>
         </div>
     );
 }

@@ -1,3 +1,9 @@
+# とりあえずの覚書
+## links
+- [いあきゃら](https://iachara.com/) :これを徹底的にパクる。
+- [パラノイア素材配布サイト](https://paranoia.newgamesorder.jp/downloads) :キャラクターシートの要件などはここの「リブーテッド用」を参照してほしい。
+
+# Next.js
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

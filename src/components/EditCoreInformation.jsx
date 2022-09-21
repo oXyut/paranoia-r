@@ -29,13 +29,13 @@ const ViewCoreInformation = (props) => {
           {/* <Box sx={{ flexGrow: 1 }}> */}
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <TextField id="standard-basic" label="Standard" variant="standard" />
+              <TextField id="standard-basic" label="キャラクター名" variant="standard" />
             </Grid>
             <Grid xs>
-              <TextField id="standard-basic" label="Standard" variant="standard" />
+              <TextField id="standard-basic" label="セキュリティクリアランス" variant="standard" />
             </Grid>
             <Grid xs>
-              <TextField id="standard-basic" label="Standard" variant="standard" />
+              <TextField id="standard-basic" label="ホームセクター" variant="standard" />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{margin: 1}}>

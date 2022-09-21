@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Container, Paper, Typography, Button } from "@mui/material";
 import { useRouter } from "next/router";
 import EditCoreInformation from "../../../src/components/EditCoreInformation";
 import SearchAppBar from "../../../src/components/SearchAppBar";
@@ -15,8 +15,15 @@ const CharacterEdit = () => {
             <SearchAppBar/>
             <h1>編集モード</h1>
             <p>id is : {id}</p>
-
+            <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+            <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+            <Typography component="h1" variant="h4" align="center" margin={3}>
+                あああ
+            </Typography>
             <EditCoreInformation/>
+            </Paper>
+            </Container>
+
 
             <Button
                 component={NextLinkComposed}

@@ -2,11 +2,16 @@
   "name": "paranoia-r-nextjs",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oXyut.github.io/paranoia-r/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "rm": "rm -rf docs",
+    "mv": "mv build docs",
+    "git": "git add . && git commit && git push origin master",
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

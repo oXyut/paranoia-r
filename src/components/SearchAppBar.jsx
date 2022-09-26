@@ -85,9 +85,9 @@ export default function SearchAppBar() {
           >
             Paranoia-R Character Sheet
             </Button> */}
-            <a href="/">
+            {/* <a href="/">
               <img src={`/paranoia-logo.svg`} alt="logo" width="60" href=""/>
-            </a>
+            </a> */}
               <Typography variant="h5" sx={{marginLeft:5}}>Paranoia-R</Typography>
           <div style={{ flexGrow: 1 }}></div>
           <Search>

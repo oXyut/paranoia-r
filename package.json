@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "rm": "rm -rf docs",
-    "mv": "mv build docs",
+    "rm": "rm -rf out",
+    "mv": "mv build out",
     "git": "git add . && git commit && git push origin main",
-    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
+    "deploy": "npm run rm && npm run build && npm run export"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

@@ -18,7 +18,7 @@ const CharacterView = () => {
     const router = useRouter();
     const { id } = router.query;
 
-    const [info, setInfo] = useState("info読み込み中");
+    const [info, setInfo] = useState({});
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     useEffect(() => {

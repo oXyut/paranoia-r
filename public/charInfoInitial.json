@@ -1,0 +1,61 @@
+{
+    "id": "",
+    "tag": "",
+    "information":{
+        "CoreInformation": {
+        "name": "",
+        "clearance": "RED",
+        "sector": "",
+        "number": 5,
+        "sex": "",
+        "personality": ["", "", ""]
+        },
+        "Development": {
+            "star": 0,
+            "xp": 0,
+            "Stats": {
+                "violence": [0,0],
+                "brains": [0,0],
+                "chutzpah": [0,0],
+                "mechanics": [0,0]
+            }
+        },
+        "Skills": {
+            "Violence": {
+                "athletics": [0,0],
+                "guns": [0,0],
+                "melee": [0,0],
+                "throw": [0,0]
+            },
+            "Brains": {
+                "science": [0,0],
+                "psychology": [0,0],
+                "bureaucracy": [0,0],
+                "alpha_complex": [0,0]
+            },
+            "Chutzpah": {
+                "bluff": [0,0],
+                "charm": [0,0],
+                "intimidate": [0,0],
+                "stealth": [0,0]
+            },
+            "Mechanics": {
+                "operate": [0,0],
+                "engineer": [0,0],
+                "program": [0,0],
+                "demolitions": [0,0]
+            }
+        },
+        "Wellbeing": {
+            "moxie": [8, 8],
+            "Wounds": {
+                "hurt": false,
+                "injured": false,
+                "maimed": false,
+                "dead": false
+            },
+            "memory": ""
+        },
+        "Equipment": [""]
+    }
+}

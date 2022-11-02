@@ -1,7 +1,6 @@
 {
-    "id": "id",
-    "tag": "tag",
-    "info" : {
+    "tag": "test-tag",
+    "information":{
         "CoreInformation": {
         "name": "ADAM",
         "clearance": "UV",
@@ -54,7 +53,7 @@
                 "maimed": false,
                 "dead": false
             },
-            "memory": "MUIは、新機能を迅速に出荷するための包括的なUIツールスイートを提供します。MUIのコンポーネントライブラリであるMaterial UIから始めるか、独自のデザインシステムをMUIの量産可能なコンポーネントに持ち込んでください。"
+            "memory": "ADAMは、ある日、自分の記憶を失っていた。"
         },
         "Equipment": ["ZAPガン", "ジャンプスーツ", "ザ・コンピュータ様への忠誠心"]
     }

@@ -1,10 +1,21 @@
 import SearchAppBar from '../src/components/SearchAppBar'
 import { Button } from "@mui/material";
 import { NextLinkComposed } from '../src/components/NextLinkComposed';
+import testCharInfoWithId from '../public/charInfoWithId.json';
+import { useEffect, useState, useContext } from 'react';
+import { v4 } from "uuid";
+
+
 
 export default function Home() {
+  type typeCharInfoWithId = typeof testCharInfoWithId;
 
   const id = "test-id-1";
+
+  const [uuid, setUuid] = useState<string>(v4());
+
+  // charInfoListを管理するuseState
+  const [charInfoList, setCharInfoList] = useState<typeCharInfoWithId>(testCharInfoWithId);
 
   return (
     <div>
@@ -24,11 +35,11 @@ export default function Home() {
       <Button
         component={NextLinkComposed}
         to={{
-            pathname: "/char/edit/"+id
+            pathname: "/char/edit/"+ uuid
         }}
         variant="contained"
     >
-        編集モードへ
+        新しくキャラクターを作成する
       </Button>
     </div>
   )

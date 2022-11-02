@@ -1,6 +1,11 @@
-import { Button, Paper, Container, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
+
+import { Grid, Button, Box, Rating, Paper, Container, Typography, } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material"
+import { styled } from '@mui/material/styles';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import UnderlinedBox from '../../../src/components/UnderlinedBox';
 
 import SearchAppBar from "../../../src/components/SearchAppBar";
 import ViewCoreInformation from "../../../src/components/ViewCoreInformation";
@@ -9,27 +14,35 @@ import ViewDevelopment from "../../../src/components/ViewDevelopment";
 import ViewSkills from "../../../src/components/ViewSkills";
 import ViewWellbeing from "../../../src/components/ViewWellbeing";
 import ViewEquipment from "../../../src/components/ViewEquipment";
-import testCharInfo from "../../../public/testCharInfo.json";
 
-type typeCharInfo = typeof testCharInfo;
+import testCharInfoWithId from "../../../public/charInfoWithId.json";
+import testCharInfoOnlyInfo from "../../../public/charInfoOnlyInfo.json";
+
+type typeCharInfoWithId = typeof testCharInfoWithId;
+type typeCharInfoOnlyInfo = typeof testCharInfoOnlyInfo;
 
 const CharacterView = () => {
 
     const router = useRouter();
     const { id } = router.query;
 
-    const [info, setInfo] = useState<typeCharInfo>(testCharInfo);
+    const [info, setInfo] = useState<typeCharInfoOnlyInfo>(testCharInfoOnlyInfo);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     useEffect(() => {
         console.log("useEffect");
         const { id } = router.query;
         console.log(`id: ${id}`);
+        setInfo(testCharInfoWithId.find((char) => char.id === id));
     }, []);
 
     const handleDataLoad = () => {
         setIsDataLoaded(true);
     }
+
+    const SmallFontBox = styled(Box)(({ theme }) => ({
+        fontSize: 14,
+      }))
 
 
     return (
@@ -41,13 +54,16 @@ const CharacterView = () => {
             {isDataLoaded && ( // jsxなりのif文の書き方らしい
                     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                     <Typography component="h1" variant="h4" align="center" margin={3}>
-                        {`${info.info.CoreInformation.name}-${info.info.CoreInformation.clearance}-${info.info.CoreInformation.sector}-${info.info.CoreInformation.number}`}
+                        {`${info.information.CoreInformation.name}-${info.information.CoreInformation.clearance}-${info.information.CoreInformation.sector}-${info.information.CoreInformation.number}`}
                     </Typography>
-                    <ViewCoreInformation info={info.info.CoreInformation}/>
-                    <ViewDevelopment info={info.info.Development}/>
-                    <ViewSkills info={info.info.Skills}/>
-                    <ViewWellbeing info={info.info.Wellbeing}/>
-                    <ViewEquipment info={info.info.Equipment}/>
+
+                    <ViewCoreInformation info={info.information.CoreInformation}/>
+                    <ViewDevelopment info={info.information.Development}/>
+                    <ViewSkills info={info.information.Skills}/>
+                    <ViewWellbeing info={info.information.Wellbeing}/>
+                    <ViewEquipment info={info.information.Equipment}/>
+
+
                     </Paper>
             )}
             {!isDataLoaded && (

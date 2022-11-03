@@ -14,7 +14,7 @@ import {CharInfoContext} from '../../pages/char/edit/[id]';
 
 
 
-const ViewCoreInformation = (props) => {
+const EditCoreInformation = (props) => {
   // console.log(props);
   // const CoreInformation = props.info;
 
@@ -121,4 +121,4 @@ const ViewCoreInformation = (props) => {
     );
 }
 
-export default ViewCoreInformation;
+export default EditCoreInformation;

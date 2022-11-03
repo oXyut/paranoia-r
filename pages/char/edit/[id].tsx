@@ -2,7 +2,6 @@ import { Container, Paper, Typography, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
 import { useRouter } from "next/router";
-import EditCoreInformation from "../../../src/components/EditCoreInformation";
 import SearchAppBar from "../../../src/components/SearchAppBar";
 import { NextLinkComposed } from "../../../src/components/NextLinkComposed";
 import { useEffect, useState, createContext, useContext } from 'react';
@@ -10,6 +9,8 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 
 import charInfoinitial from "../../../public/charInfoInitial.json";
 import firebaseURL from "../../../public/firebaseURL.json";
+import EditCoreInformation from "../../../src/components/EditCoreInformation";
+import EditDevelopment from "../../../src/components/EditDevelopment";
 
 type typeCharInfoinitial = typeof charInfoinitial;
 
@@ -103,6 +104,7 @@ const CharacterEdit = () => {
             </Typography>
             <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
             <EditCoreInformation/>
+            <EditDevelopment/>
             </CharInfoContext.Provider>
             </Paper>
             </Container>

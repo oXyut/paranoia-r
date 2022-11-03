@@ -1,13 +1,21 @@
 import { Container, Paper, Typography, Button } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
 import { useRouter } from "next/router";
 import EditCoreInformation from "../../../src/components/EditCoreInformation";
 import SearchAppBar from "../../../src/components/SearchAppBar";
 import { NextLinkComposed } from "../../../src/components/NextLinkComposed";
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 import charInfoinitial from "../../../public/charInfoInitial.json";
 import firebaseURL from "../../../public/firebaseURL.json";
+
+type typeCharInfoinitial = typeof charInfoinitial;
+
+export const CharInfoContext = createContext({} as {
+    charInfo: typeCharInfoinitial, setCharInfo: React.Dispatch<React.SetStateAction<typeCharInfoinitial>>
+});
 
 const CharacterEdit = () => {
 
@@ -15,46 +23,94 @@ const CharacterEdit = () => {
     const { id } = router.query;
     console.log("/edit/"+id);
 
-    type typeCharInfoinitial = typeof charInfoinitial;
     const getCharInfoURL = firebaseURL.root + "getCharInfo"
 
-    const [CharInfo, SetCharInfo] = useState<typeCharInfoinitial>(charInfoinitial);
+    const [charInfo, setCharInfo] = useState<typeCharInfoinitial>(charInfoinitial);
+
+    const dictColor = {
+        "IR": "#000000",
+        "RED": red[900],
+        "ORANGE": deepOrange[500],
+        "YELLOW": yellow[800],
+        "GREEN": green[800],
+        "BLUE": blue[500],
+        "INDIGO": indigo[500],
+        "UV": grey[500],
+      }
+    
+      // charInfo.information.CoreInformation.clearanceに応じて色を変更
+      const [theme, setTheme] = useState(createTheme({
+        palette: {
+          primary: {
+            main: dictColor[charInfo.information.CoreInformation.clearance],
+          },
+          secondary: {
+            main: '#19857b',
+          },
+        },
+      }));
+
+    
+    useEffect(() => {
+        console.log("change theme:", charInfo.information.CoreInformation.clearance);
+        setTheme(createTheme({
+            palette: {
+              primary: {
+                main: dictColor[charInfo.information.CoreInformation.clearance],
+              },
+              secondary: {
+                main: '#19857b',
+              },
+            },
+          }))
+    }, [charInfo.information.CoreInformation.clearance]);
+
+
 
     useEffect(() => {
         // idを更新
         if (typeof id === "string") {
         // idがstring型であれば、axiosでキャラクター情報を取得
-        axios.get(getCharInfoURL, {
-            params:{id: id}
-        })
-        .then((res: AxiosResponse) => {
-            console.log(res.data);
-            SetCharInfo(res.data);
-        })
-        .catch((err: AxiosError) => {
-            console.log(err);
-        })
+        // axios.get(getCharInfoURL, {
+        //     params:{id: id}
+        // })
+        // .then((res: AxiosResponse) => {
+        //     console.log(res.data);
+        //     SetCharInfo(res.data);
+        // })
+        // .catch((err: AxiosError) => {
+        //     console.log(err);
+        // })
         }
     }, [id]);
 
     return (
         <div>
+            <ThemeProvider theme={theme}>
             <SearchAppBar/>
             <h1>編集モード</h1>
-            <p>id is : {CharInfo.id}</p>
+            <p>id is : {charInfo.id}</p>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
             <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-            <Typography component="h1" variant="h4" align="center" margin={3}>
-                {CharInfo.information.CoreInformation.name}-{CharInfo.information.CoreInformation.clearance}-{CharInfo.information.CoreInformation.sector}-{CharInfo.information.CoreInformation.number}
+            <Typography
+                component="h1"
+                variant="h4"
+                align="center"
+                margin={3}
+                color="primary"
+                >
+                {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number}
             </Typography>
+            <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
             <EditCoreInformation/>
+            </CharInfoContext.Provider>
             </Paper>
             </Container>
 
             <Button
                 component={NextLinkComposed}
                 to={{
-                    pathname: "/char/view/"+id
+                    pathname: "/char/edit/"+id
                 }}
                 variant="contained"
             >
@@ -70,6 +126,7 @@ const CharacterEdit = () => {
             >
                 閲覧モードへ
             </Button>
+            </ThemeProvider>
         </div>
     );
 }

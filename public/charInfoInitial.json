@@ -6,7 +6,7 @@
         "name": "",
         "clearance": "RED",
         "sector": "",
-        "number": 5,
+        "number": [1, 5],
         "sex": "",
         "personality": ["", "", ""]
         },

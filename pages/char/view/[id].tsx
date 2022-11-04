@@ -54,7 +54,7 @@ const CharacterView = () => {
             {isDataLoaded && ( // jsxなりのif文の書き方らしい
                     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                     <Typography component="h1" variant="h4" align="center" margin={3}>
-                        {`${info.information.CoreInformation.name}-${info.information.CoreInformation.clearance}-${info.information.CoreInformation.sector}-${info.information.CoreInformation.number}`}
+                        {`${info.information.CoreInformation.name}-${info.information.CoreInformation.clearance}-${info.information.CoreInformation.sector}-${info.information.CoreInformation.number[0]}`}
                     </Typography>
 
                     <ViewCoreInformation info={info.information.CoreInformation}/>

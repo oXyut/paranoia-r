@@ -10,8 +10,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {CharInfoContext} from '../../pages/char/edit/[id]';
-
-import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
+import UnderlinedBox from './UnderlinedBox';
 
 
 
@@ -25,6 +24,23 @@ const EditDevelopment = (props) => {
   // const CoreInformation = props.info;
 
   const {charInfo, setCharInfo} = useContext(CharInfoContext);
+
+  useEffect(() => {
+    console.log("EditDevelopment");
+    const newCharInfo = {...charInfo};
+    const numberLimit = 5
+      - newCharInfo.information.Development.Stats.violence[1]
+      - newCharInfo.information.Development.Stats.brains[1]
+      - newCharInfo.information.Development.Stats.chutzpah[1]
+      - newCharInfo.information.Development.Stats.mechanics[1];
+    newCharInfo.information.CoreInformation.number[1] = numberLimit;
+    setCharInfo(newCharInfo);
+  },[
+    charInfo.information.Development.Stats.violence[1],
+    charInfo.information.Development.Stats.brains[1],
+    charInfo.information.Development.Stats.chutzpah[1],
+    charInfo.information.Development.Stats.mechanics[1]
+  ]);
 
     return (
       <>
@@ -66,6 +82,11 @@ const EditDevelopment = (props) => {
 
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
+            <Typography component="h3" variant="subtitle1">
+            基本値
+          </Typography>
+            </Grid>
+            <Grid xs>
               <TextField
                       label="暴力"
                       type = "number"
@@ -95,6 +116,83 @@ const EditDevelopment = (props) => {
                       type = "number"
                       value={charInfo.information.Development.Stats.mechanics[0]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.mechanics[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                    />
+            </Grid>
+          </Grid>
+
+
+          <Grid container spacing={1} sx={{margin: 1}}>
+            <Grid xs>
+            <Typography component="h3" variant="subtitle1">
+            増加値
+          </Typography>
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="暴力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.violence[1]}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.violence[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                    />
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="知力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.brains[1]}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.brains[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                    />
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="交渉力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.chutzpah[1]}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.chutzpah[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                    />
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="技術力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.mechanics[1]}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.mechanics[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                    />
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={1} sx={{margin: 1}}>
+            <Grid xs>
+            <Typography component="h3" variant="subtitle1">
+              合計値
+            </Typography>
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="暴力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.violence[0] + charInfo.information.Development.Stats.violence[1]}
+                    />
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="知力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.brains[0] + charInfo.information.Development.Stats.brains[1]}
+                    />
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="交渉力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.chutzpah[0] + charInfo.information.Development.Stats.chutzpah[1]}
+                    />
+            </Grid>
+            <Grid xs>
+              <TextField
+                      label="技術力"
+                      type = "number"
+                      value={charInfo.information.Development.Stats.mechanics[0] + charInfo.information.Development.Stats.mechanics[1]}
                     />
             </Grid>
           </Grid>

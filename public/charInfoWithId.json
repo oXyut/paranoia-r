@@ -7,7 +7,7 @@
             "name": "ADAM",
             "clearance": "UV",
             "sector": "JPN",
-            "number": 5,
+            "number": [1, 5],
             "sex": "男",
             "personality": ["短気", "優柔不断", "臆病"]
             },
@@ -68,7 +68,7 @@
             "name": "EVA",
             "clearance": "INDIGO",
             "sector": "USA",
-            "number": 5,
+            "number": [2, 5],
             "sex": "女",
             "personality": ["短気", "優柔不断", "臆病"]
             },

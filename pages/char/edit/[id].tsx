@@ -100,7 +100,7 @@ const CharacterEdit = () => {
                 margin={3}
                 color="primary"
                 >
-                {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number}
+                {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number[0]}
             </Typography>
             <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
             <EditCoreInformation/>

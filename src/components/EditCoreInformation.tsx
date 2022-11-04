@@ -8,6 +8,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import UnderlinedBox from './UnderlinedBox';
 import {CharInfoContext} from '../../pages/char/edit/[id]';
 
 
@@ -34,6 +36,9 @@ const EditCoreInformation = (props) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
+        <Typography component="h3" variant="subtitle1">
+            基本情報
+          </Typography>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
               <TextField
@@ -68,9 +73,7 @@ const EditCoreInformation = (props) => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.sector = e.target.value; setCharInfo(newCharInfo);}}
               />
             </Grid>
-          </Grid>
-          <Grid container spacing={1} sx={{margin: 1}}>
-            <Grid xs={2}>
+            <Grid xs>
               <FormControl fullWidth>
                 <InputLabel >性別</InputLabel>
               <Select
@@ -84,34 +87,56 @@ const EditCoreInformation = (props) => {
               </Select>
               </FormControl>
             </Grid>
-            <Grid xs={2.5}>
+          </Grid>
+          <Typography component="h3" variant="subtitle1">
+            性格
+          </Typography>
+          <Grid container spacing={1} sx={{margin: 1}}>
+            <Grid xs>
               <TextField
                       label="性格1"
                       value={charInfo.information.CoreInformation.personality[0]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.personality[0] = e.target.value; setCharInfo(newCharInfo);}}
                     />
             </Grid>
-            <Grid xs={2.5}>
+            <Grid xs>
               <TextField
                       label="性格2"
                       value={charInfo.information.CoreInformation.personality[1]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.personality[1] = e.target.value; setCharInfo(newCharInfo);}}
                     />
             </Grid>
-            <Grid xs={2.5}>
+            <Grid xs>
               <TextField
                       label="性格3"
                       value={charInfo.information.CoreInformation.personality[2]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.personality[2] = e.target.value; setCharInfo(newCharInfo);}}
                     />
             </Grid>
-            <Grid xs={2}>
+          </Grid>
+          <Typography component="h3" variant="subtitle1">
+            クローンナンバー
+          </Typography>
+          <Grid container spacing={1} sx={{margin: 1}}>
+            <Grid xs={4}>
+              <Box/>
+            </Grid>
+            <Grid xs={4}>
+              <TextField
+                        label="現在のクローンナンバー"
+                        type = "number"
+                        value={charInfo.information.CoreInformation.number[0]}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.number[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                      />
+            </Grid>
+            <Grid xs={4}>
             <TextField
-                      label="クローンナンバー"
-                      type = "number"
-                      value={charInfo.information.CoreInformation.number}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.number = Number(e.target.value); setCharInfo(newCharInfo);}}
-                    />
+                        label="クローンナンバーの上限"
+                        type = "number"
+                        value={charInfo.information.CoreInformation.number[1]}
+                        // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.number[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
+                        // disabled
+                      />
             </Grid>
           </Grid>
         </AccordionDetails>

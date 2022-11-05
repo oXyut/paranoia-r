@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState, createContext, useContext } from 'react';
-import { Box, Paper, TextField, Rating, colors } from '@mui/material';
+import { Box, Paper, TextField, Rating } from '@mui/material';
 import {InputLabel, Select, MenuItem, FormControl} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -19,7 +19,7 @@ const SmallFontBox = styled(Box)(({ theme }) => ({
   fontSize: 14,
 }))
 
-const EditDevelopment = (props) => {
+const EditSkills = (props) => {
   // console.log(props);
   // const CoreInformation = props.info;
 
@@ -51,43 +51,35 @@ const EditDevelopment = (props) => {
           id="panel1a-header"
         >
         <Typography component="h3" variant="h6">
-          PART2 DEVELOPMENT
+          PART3 SKILLS
         </Typography>
 
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <Box sx={{textAlign:"center"}}>
-                <SmallFontBox>反逆スター</SmallFontBox>
-                <Rating
-                  value={charInfo.information.Development.star}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.star = Number(e.target.value); setCharInfo(newCharInfo);}}
-                  />
+              <Box sx={{textAlign: 'center'}}>
+                <Typography>暴力</Typography>
               </Box>
             </Grid>
             <Grid xs>
-              <TextField
-                      label="XPポイント"
-                      type = "number"
-                      value={charInfo.information.Development.xp}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.xp = Number(e.target.value); setCharInfo(newCharInfo);}}
-                    />
+              <Box sx={{textAlign: 'center'}}>
+                <Typography>知力</Typography>
+              </Box>
+            </Grid>
+            <Grid xs>
+              <Box sx={{textAlign: 'center'}}>
+                <Typography>交渉力</Typography>
+              </Box>
+            </Grid>
+            <Grid xs>
+              <Box sx={{textAlign: 'center'}}>
+                <Typography>技術力</Typography>
+              </Box>
             </Grid>
           </Grid>
 
-          <Typography component="h3" variant="subtitle1">
-            STATS
-          </Typography>
-
-          <Grid container spacing={1} sx={{margin: 1}} alignItems="stretch">
-            <Grid xs>
-              <Box sx={{textAlign:"center", margin: 1.5}}>
-                <Typography component="h3" variant="subtitle1">
-                  基本値
-                </Typography>
-              </Box>
-            </Grid>
+          <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
               <TextField
                       label="暴力"
@@ -125,13 +117,6 @@ const EditDevelopment = (props) => {
 
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <Box sx={{textAlign:"center", margin: 1.5}}>
-                <Typography component="h3" variant="subtitle1">
-                  増加値
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid xs>
               <TextField
                       label="暴力"
                       type = "number"
@@ -167,13 +152,6 @@ const EditDevelopment = (props) => {
 
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <Box sx={{textAlign:"center", margin: 1.5}}>
-                <Typography component="h3" variant="subtitle1">
-                  合計値
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid xs>
               <TextField
                       label="暴力"
                       type = "number"
@@ -208,4 +186,4 @@ const EditDevelopment = (props) => {
     );
 }
 
-export default EditDevelopment;
+export default EditSkills;

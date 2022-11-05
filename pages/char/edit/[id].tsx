@@ -11,6 +11,7 @@ import charInfoinitial from "../../../public/charInfoInitial.json";
 import firebaseURL from "../../../public/firebaseURL.json";
 import EditCoreInformation from "../../../src/components/EditCoreInformation";
 import EditDevelopment from "../../../src/components/EditDevelopment";
+import EditSkills from "../../../src/components/EditSkills";
 
 type typeCharInfoinitial = typeof charInfoinitial;
 
@@ -105,6 +106,7 @@ const CharacterEdit = () => {
             <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
             <EditCoreInformation/>
             <EditDevelopment/>
+            <EditSkills/>
             </CharInfoContext.Provider>
             </Paper>
             </Container>

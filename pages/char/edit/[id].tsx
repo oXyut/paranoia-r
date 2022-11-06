@@ -1,4 +1,5 @@
-import { Container, Paper, Typography, Button } from "@mui/material";
+import { Container, Paper, Typography, Button, Box, AppBar } from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
 import { useRouter } from "next/router";
@@ -25,11 +26,48 @@ const CharacterEdit = () => {
 
     const router = useRouter();
     const { id } = router.query;
-    console.log("/edit/"+id);
-
-    const getCharInfoURL = firebaseURL.root + "getCharInfo"
-
     const [charInfo, setCharInfo] = useState<typeCharInfoinitial>(charInfoinitial);
+    
+    const postCharInfoURL = firebaseURL.root + "postCharInfo";
+    const getCharInfoURL = firebaseURL.root + "getCharInfo";
+
+    useEffect(() => {
+      if (typeof id === "string") {
+        // firebaseからデータを取得
+        axios.get(getCharInfoURL, { params: { id: id } })
+          .then((res: AxiosResponse) => {
+            if (res.data === "not found") {
+              // firebaseにデータがない場合は初期値をセット
+              // charInfoのidを更新
+              setCharInfo(charInfo => ({ ...charInfo, id: id }))
+            } else {
+              // firebaseにデータがある場合はfirebaseから取得したデータをセット
+              setCharInfo(res.data);
+            }
+          })
+          .catch((err: AxiosError) => {
+            console.log(err);
+          })
+      }
+    }, []);
+
+    const saveCharInfo = () => {
+        console.log("saveCharInfo");
+        console.log(charInfo);
+        if (typeof id === "string") {
+          // charInfoのidを更新
+          setCharInfo(charInfo => ({ ...charInfo, id: id }));
+          // charInfoをfirebaseに保存
+          axios.post(postCharInfoURL, charInfo)
+          .then((res: AxiosResponse) => {
+              console.log(res.data);
+          })
+          .catch((err: AxiosError) => {
+              console.log(err);
+          })
+        }
+
+    }
 
     const dictColor = {
         "IR": "#000000",
@@ -41,7 +79,7 @@ const CharacterEdit = () => {
         "INDIGO": indigo[500],
         "UV": grey[500],
       }
-    
+
       // charInfo.information.CoreInformation.clearanceに応じて色を変更
       const [theme, setTheme] = useState(createTheme({
         palette: {
@@ -49,51 +87,31 @@ const CharacterEdit = () => {
             main: dictColor[charInfo.information.CoreInformation.clearance],
           },
           secondary: {
-            main: '#19857b',
+            main: "#ffffff",
           },
         },
       }));
 
     
     useEffect(() => {
-        console.log("change theme:", charInfo.information.CoreInformation.clearance);
         setTheme(createTheme({
             palette: {
               primary: {
                 main: dictColor[charInfo.information.CoreInformation.clearance],
               },
               secondary: {
-                main: '#19857b',
+                main: "#ffffff",
               },
             },
           }))
     }, [charInfo.information.CoreInformation.clearance]);
-
-
-
-    useEffect(() => {
-        // idを更新
-        if (typeof id === "string") {
-        // idがstring型であれば、axiosでキャラクター情報を取得
-        // axios.get(getCharInfoURL, {
-        //     params:{id: id}
-        // })
-        // .then((res: AxiosResponse) => {
-        //     console.log(res.data);
-        //     SetCharInfo(res.data);
-        // })
-        // .catch((err: AxiosError) => {
-        //     console.log(err);
-        // })
-        }
-    }, [id]);
 
     return (
         <div>
             <ThemeProvider theme={theme}>
             <SearchAppBar/>
             <h1>編集モード</h1>
-            <p>id is : {charInfo.id}</p>
+            <p>id is : {id}</p>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
               <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                 <Typography
@@ -115,25 +133,41 @@ const CharacterEdit = () => {
               </Paper>
             </Container>
 
-            <Button
-                component={NextLinkComposed}
-                to={{
-                    pathname: "/char/edit/"+id
-                }}
-                variant="contained"
-            >
-                保存
-            </Button>
-
-            <Button
-                component={NextLinkComposed}
-                to={{
-                    pathname: "/char/view/"+id
-                }}
-                variant="contained"
-            >
-                閲覧モードへ
-            </Button>
+            <Box pt={5}>
+              <AppBar
+                position="fixed"
+                sx={{ top: 'auto', bottom: 0 }}
+                color="secondary"
+                >
+                <Box p={2}>
+                  <Grid container spacing={2} justifyContent="center" alignItems={"center"}>
+                    <Grid xs={6}>
+                      <Typography variant="body2" color="text.primary" align="center">
+                      </Typography>
+                    </Grid>
+                    <Grid xs={3}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        onClick={saveCharInfo}
+                        >
+                        保存
+                      </Button>
+                    </Grid>
+                    <Grid xs={3}>
+                    <Button
+                      component={NextLinkComposed}
+                      to={{pathname: "/char/view/"+id}}
+                      variant="contained"
+                      fullWidth
+                    >
+                    閲覧モードへ
+                    </Button>
+                    </Grid>
+                  </Grid>
+                  </Box>
+                </AppBar>
+              </Box>
             </ThemeProvider>
         </div>
     );

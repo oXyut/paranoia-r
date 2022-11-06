@@ -13,7 +13,7 @@ import ViewSkills from "../../../src/components/ViewSkills";
 import ViewWellbeing from "../../../src/components/ViewWellbeing";
 import ViewEquipment from "../../../src/components/ViewEquipment";
 
-import testCharInfoInitial from "../../../public/charInfoOnlyInfo.json";
+import testCharInfoInitial from "../../../public/charInfoInitial.json";
 import firebaseURL from "../../../public/firebaseURL.json";
 import axios, { AxiosResponse, AxiosError } from "axios";
 

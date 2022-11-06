@@ -55,7 +55,7 @@ const ViewCoreInformation = (props) => {
               <UnderlinedBox name={"性格"} value={CoreInformation.personality.join(",　")} />
             </Grid>
             <Grid xs={2}>
-              <UnderlinedBox name={"クローンナンバー"} value={CoreInformation.number} />
+              <UnderlinedBox name={"クローンナンバー"} value={`${CoreInformation.number[0]}/${CoreInformation.number[1]}`} />
             </Grid>
           </Grid>
         {/* </Box> */}

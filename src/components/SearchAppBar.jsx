@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button } from '@mui/material'; 
 import { ClassNames } from '@emotion/react';
+import { NextLinkComposed } from './NextLinkComposed';
 // import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -56,51 +57,37 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <>
+    <Box sx={{ flexGrow: 1 }} p={3}>
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            Paranoia-R Character Sheet
-          </Typography> */}
-          {/* <Button
-            variant="text"
-            size="large"
-            sx={"color:white;"}
-            component={Link}
-            to = "/"
-          >
-            Paranoia-R Character Sheet
-            </Button> */}
-            {/* <a href="/">
-              <img src={`/paranoia-logo.svg`} alt="logo" width="60" href=""/>
-            </a> */}
-              <Typography variant="h5" sx={{marginLeft:5}}>Paranoia-R</Typography>
+        <Button
+          component={NextLinkComposed}
+          to={{pathname: "/"}}
+          variant="text"
+          color="inherit"
+          fullWidth
+        >
+        Paranoia-R
+        </Button>
           <div style={{ flexGrow: 1 }}></div>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              placeholder="タグで検索"
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  // /char/tag/tagnameに遷移
+                  window.location.href = '/char/tag/' + e.target.value;
+                }
+              }}
             />
           </Search>
         </Toolbar>
       </AppBar>
     </Box>
+    </>
   );
 }

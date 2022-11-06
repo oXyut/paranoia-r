@@ -1,4 +1,4 @@
-import SearchAppBar from '../src/components/SearchAppBar'
+import SearchAppBar from '../../../src/components/SearchAppBar'
 import {Box, AppBar, Typography, Stack, Paper, Container} from '@mui/material'
 import {Accordion, AccordionSummary, AccordionDetails} from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -6,19 +6,23 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
 import { Button } from "@mui/material";
-import { NextLinkComposed } from '../src/components/NextLinkComposed';
-import testCharInfoWithId from '../public/charInfoWithId.json';
+import { NextLinkComposed } from '../../../src/components/NextLinkComposed';
+import testCharInfoWithId from '../../../public/charInfoWithId.json';
 import { useEffect, useState, useContext } from 'react';
 import { v4 } from "uuid";
-import firebaseURL from "../public/firebaseURL.json";
+import firebaseURL from "../../../public/firebaseURL.json";
 import axios, { AxiosResponse, AxiosError } from "axios";
+import { useRouter } from "next/router";
 
 
 
 export default function Home() {
   type typeCharInfoWithId = typeof testCharInfoWithId;
-  const getAllCharInfoURL = firebaseURL.root + "getAllCharInfo";
+  const getTaggedCharInfoURL = firebaseURL.root + "getTaggedCharInfo";
   const deleteCharInfoURL = firebaseURL.root + "deleteCharInfo";
+
+  const router = useRouter();
+  const { tag } = router.query;
 
   const [uuid, setUuid] = useState<string>(v4());
 
@@ -26,32 +30,34 @@ export default function Home() {
   const [charInfoList, setCharInfoList] = useState<typeCharInfoWithId>([]);
 
   useEffect(() => {
-    getAllCharInfoHandler();
+    getTaggedCharInfoHandler();
   }, []);
 
-  const getAllCharInfoHandler = () => {
-        // firebaseからデータを取得
-        axios.get(getAllCharInfoURL)
+  const getTaggedCharInfoHandler = () => {
+        // firebaseからtagに紐づくデータを取得
+        axios.post(getTaggedCharInfoURL, { tag: tag })
         .then((res: AxiosResponse) => {
-          console.log(res.data);
-          setCharInfoList(res.data);
-        })
+            console.log(res.data);
+            setCharInfoList(res.data);
+            }
+        )
         .catch((err: AxiosError) => {
-          console.log(err);
-        })
+            console.log(err);
+            }
+        )
   }
 
-  const deleteCharInfoHandler = (id: string) => {
+  const deleteCharInfoHandler = async (id: string) => {
     console.log("deleteCharInfo");
     console.log(id);
-    axios.post(deleteCharInfoURL, { id: id })
+    await axios.post(deleteCharInfoURL, { id: id })
       .then((res: AxiosResponse) => {
         console.log(res.data);
       })
       .catch((err: AxiosError) => {
         console.log(err);
       })
-    setTimeout(()=>{getAllCharInfoHandler()}, 1000);
+    setTimeout(()=>{getTaggedCharInfoHandler()}, 1000);
   }
 
   const theme = createTheme({
@@ -99,7 +105,7 @@ export default function Home() {
     <div>
       <ThemeProvider theme={theme}>
         <SearchAppBar/>
-        <h1>パラノイアリブーテッド用キャラクターシート作成サイト</h1>
+        <h1>タグ検索結果 : {tag}</h1>
 
         <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
         <Accordion defaultExpanded={true} variant="outlined">
@@ -130,11 +136,6 @@ export default function Home() {
                 </Typography>
                 </ThemeProvider>
                 <Grid container>
-                  <Grid xs={6}>
-                    <Typography variant="body1">
-                      タグ : {charInfo.tag}
-                    </Typography>
-                  </Grid>
                   <Grid xs={6}>
                     <Typography variant="body1">
                       最終更新日時 : {charInfo.lastUpdate}

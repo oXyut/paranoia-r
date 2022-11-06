@@ -140,6 +140,7 @@ const EditWellbeing = (props) => {
             multiline={true}
             rows={4}
             variant="outlined"
+            defaultValue={charInfo.information.Wellbeing.memory}
           />
 
         </AccordionDetails>

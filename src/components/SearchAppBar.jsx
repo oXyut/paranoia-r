@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button } from '@mui/material'; 
 import { ClassNames } from '@emotion/react';
+import { NextLinkComposed } from './NextLinkComposed';
 // import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -60,7 +61,15 @@ export default function SearchAppBar() {
     <Box sx={{ flexGrow: 1 }} p={3}>
       <AppBar position="fixed">
         <Toolbar>
-          <Typography variant="h5" sx={{marginLeft:5}}>Paranoia-R</Typography>
+        <Button
+          component={NextLinkComposed}
+          to={{pathname: "/"}}
+          variant="text"
+          color="inherit"
+          fullWidth
+        >
+        Paranoia-R
+        </Button>
           <div style={{ flexGrow: 1 }}></div>
           <Search>
             <SearchIconWrapper>
@@ -68,7 +77,12 @@ export default function SearchAppBar() {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="タグで検索"
-              inputProps={{ 'aria-label': 'search' }}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  // /char/tag/tagnameに遷移
+                  window.location.href = '/char/tag/' + e.target.value;
+                }
+              }}
             />
           </Search>
         </Toolbar>

@@ -1,6 +1,7 @@
 {
     "id": "",
     "tag": "",
+    "lastUpdate": "",
     "information":{
         "CoreInformation": {
         "name": "",
@@ -54,7 +55,7 @@
                 "maimed": false,
                 "dead": false
             },
-            "memory": ""
+            "memory": "no memory"
         },
         "Equipment": [""]
     }

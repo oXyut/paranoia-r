@@ -1,4 +1,4 @@
-import { Container, Paper, Typography, Button, Box, AppBar } from "@mui/material";
+import { Container, Paper, Typography, Button, Box, AppBar, TextField } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
@@ -40,6 +40,8 @@ const CharacterEdit = () => {
               // firebaseにデータがない場合は初期値をセット
               // charInfoのidを更新
               setCharInfo(charInfo => ({ ...charInfo, id: id }))
+              // 最終更新日時を更新
+              setCharInfo(charInfo => ({ ...charInfo, lastUpdate: "保存されていません"}));
             } else {
               // firebaseにデータがある場合はfirebaseから取得したデータをセット
               setCharInfo(res.data);
@@ -51,14 +53,15 @@ const CharacterEdit = () => {
       }
     }, []);
 
-    const saveCharInfo = () => {
+    const saveCharInfo = async () => {
         console.log("saveCharInfo");
         console.log(charInfo);
         if (typeof id === "string") {
-          // charInfoのidを更新
-          setCharInfo(charInfo => ({ ...charInfo, id: id }));
+          // charInfoのidと最終更新日時を更新
+          const newCharInfo = { ...charInfo, id: id, lastUpdate: new Date().toLocaleString() };
+          setCharInfo(newCharInfo);
           // charInfoをfirebaseに保存
-          axios.post(postCharInfoURL, charInfo)
+          await axios.post(postCharInfoURL, newCharInfo)
           .then((res: AxiosResponse) => {
               console.log(res.data);
           })
@@ -68,6 +71,7 @@ const CharacterEdit = () => {
         }
 
     }
+    
 
     const dictColor = {
         "IR": "#000000",
@@ -112,6 +116,7 @@ const CharacterEdit = () => {
             <SearchAppBar/>
             <h1>編集モード</h1>
             <p>id is : {id}</p>
+            <p>最終更新日時 : {charInfo.lastUpdate}</p>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
               <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                 <Typography
@@ -123,6 +128,13 @@ const CharacterEdit = () => {
                     >
                     {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number[0]}
                 </Typography>
+                <TextField
+                    label="タグ"
+                    variant="outlined"
+                    fullWidth
+                    value={charInfo.tag}
+                    onChange={(e) => setCharInfo(charInfo => ({ ...charInfo, tag: e.target.value }))}
+                />
                 <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
                   <EditCoreInformation/>
                   <EditDevelopment/>

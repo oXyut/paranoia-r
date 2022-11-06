@@ -2,6 +2,7 @@
     {
         "id": "test-id-1",
         "tag": "test-tag",
+        "lastUpdate": "",
         "information":{
             "CoreInformation": {
             "name": "ADAM",
@@ -63,6 +64,7 @@
     {
         "id": "test-id-2",
         "tag": "test-tag",
+        "lastUpdate": "",
         "information":{
             "CoreInformation": {
             "name": "EVA",

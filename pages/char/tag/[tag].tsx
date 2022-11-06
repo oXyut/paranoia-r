@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 
 
 
-export default function Home() {
+const TagSearch = () => {
   type typeCharInfoWithId = typeof testCharInfoWithId;
   const getTaggedCharInfoURL = firebaseURL.root + "getTaggedCharInfo";
   const deleteCharInfoURL = firebaseURL.root + "deleteCharInfo";
@@ -223,3 +223,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default TagSearch;

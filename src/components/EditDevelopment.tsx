@@ -26,7 +26,6 @@ const EditDevelopment = (props) => {
   const {charInfo, setCharInfo} = useContext(CharInfoContext);
 
   useEffect(() => {
-    console.log("EditDevelopment");
     const newCharInfo = {...charInfo};
     const numberLimit = 5
       - newCharInfo.information.Development.Stats.violence[1]
@@ -84,13 +83,49 @@ const EditDevelopment = (props) => {
             <Grid xs>
               <Box sx={{textAlign:"center", margin: 1.5}}>
                 <Typography component="h3" variant="subtitle1">
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid xs>
+              <Box sx={{textAlign:"center", margin: 1.5}}>
+                <Typography component="h3" variant="subtitle1">
+                  暴力
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid xs>
+              <Box sx={{textAlign:"center", margin: 1.5}}>
+                <Typography component="h3" variant="subtitle1">
+                  知力
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid xs>
+              <Box sx={{textAlign:"center", margin: 1.5}}>
+                <Typography component="h3" variant="subtitle1">
+                  交渉力
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid xs>
+              <Box sx={{textAlign:"center", margin: 1.5}}>
+                <Typography component="h3" variant="subtitle1">
+                  技術力
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={1} sx={{margin: 1}} alignItems="stretch">
+            <Grid xs>
+            <Box sx={{textAlign:"center", margin: 1.5}}>
+                <Typography component="h3" variant="subtitle1">
                   基本値
                 </Typography>
               </Box>
             </Grid>
             <Grid xs>
               <TextField
-                      label="暴力"
                       type = "number"
                       value={charInfo.information.Development.Stats.violence[0]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.violence[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -98,7 +133,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="知力"
                       type = "number"
                       value={charInfo.information.Development.Stats.brains[0]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.brains[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -106,7 +140,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="交渉力"
                       type = "number"
                       value={charInfo.information.Development.Stats.chutzpah[0]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.chutzpah[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -114,7 +147,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="技術力"
                       type = "number"
                       value={charInfo.information.Development.Stats.mechanics[0]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.mechanics[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -133,7 +165,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="暴力"
                       type = "number"
                       value={charInfo.information.Development.Stats.violence[1]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.violence[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -141,7 +172,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="知力"
                       type = "number"
                       value={charInfo.information.Development.Stats.brains[1]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.brains[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -149,7 +179,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="交渉力"
                       type = "number"
                       value={charInfo.information.Development.Stats.chutzpah[1]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.chutzpah[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -157,7 +186,6 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="技術力"
                       type = "number"
                       value={charInfo.information.Development.Stats.mechanics[1]}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.Development.Stats.mechanics[1] = Number(e.target.value); setCharInfo(newCharInfo);}}
@@ -175,31 +203,31 @@ const EditDevelopment = (props) => {
             </Grid>
             <Grid xs>
               <TextField
-                      label="暴力"
-                      type = "number"
-                      value={charInfo.information.Development.Stats.violence[0] + charInfo.information.Development.Stats.violence[1]}
-                    />
+                type = "number"
+                value={charInfo.information.Development.Stats.violence[0]+charInfo.information.Development.Stats.violence[1]}
+                inputProps={{ readOnly: true }}
+              />
             </Grid>
             <Grid xs>
               <TextField
-                      label="知力"
-                      type = "number"
-                      value={charInfo.information.Development.Stats.brains[0] + charInfo.information.Development.Stats.brains[1]}
-                    />
+                type = "number"
+                value={charInfo.information.Development.Stats.brains[0]+charInfo.information.Development.Stats.brains[1]}
+                inputProps={{ readOnly: true }}
+              />
             </Grid>
             <Grid xs>
               <TextField
-                      label="交渉力"
-                      type = "number"
-                      value={charInfo.information.Development.Stats.chutzpah[0] + charInfo.information.Development.Stats.chutzpah[1]}
-                    />
+                type = "number"
+                value={charInfo.information.Development.Stats.chutzpah[0]+charInfo.information.Development.Stats.chutzpah[1]}
+                inputProps={{ readOnly: true }}
+              />
             </Grid>
             <Grid xs>
               <TextField
-                      label="技術力"
-                      type = "number"
-                      value={charInfo.information.Development.Stats.mechanics[0] + charInfo.information.Development.Stats.mechanics[1]}
-                    />
+                type = "number"
+                value={charInfo.information.Development.Stats.mechanics[0]+charInfo.information.Development.Stats.mechanics[1]}
+                inputProps={{ readOnly: true }}
+              />
             </Grid>
           </Grid>
         </AccordionDetails>

@@ -131,12 +131,11 @@ const EditCoreInformation = (props) => {
             </Grid>
             <Grid xs={4}>
             <TextField
-                        label="クローンナンバーの上限"
-                        type = "number"
-                        value={charInfo.information.CoreInformation.number[1]}
-                        // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {const newCharInfo = {...charInfo}; newCharInfo.information.CoreInformation.number[0] = Number(e.target.value); setCharInfo(newCharInfo);}}
-                        // disabled
-                      />
+              label="クローンナンバーの上限"
+              type = "number"
+              value={charInfo.information.CoreInformation.number[1]}
+              inputProps = {{readOnly : true}}
+              />
             </Grid>
           </Grid>
         </AccordionDetails>

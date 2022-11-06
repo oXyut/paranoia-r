@@ -12,6 +12,8 @@ import firebaseURL from "../../../public/firebaseURL.json";
 import EditCoreInformation from "../../../src/components/EditCoreInformation";
 import EditDevelopment from "../../../src/components/EditDevelopment";
 import EditSkills from "../../../src/components/EditSkills";
+import EditWellbeing from "../../../src/components/EditWellbeing";
+import EditEquipment from "../../../src/components/EditEquipment";
 
 type typeCharInfoinitial = typeof charInfoinitial;
 
@@ -93,22 +95,24 @@ const CharacterEdit = () => {
             <h1>編集モード</h1>
             <p>id is : {charInfo.id}</p>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-            <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-            <Typography
-                component="h1"
-                variant="h4"
-                align="center"
-                margin={3}
-                color="primary"
-                >
-                {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number[0]}
-            </Typography>
-            <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
-            <EditCoreInformation/>
-            <EditDevelopment/>
-            <EditSkills/>
-            </CharInfoContext.Provider>
-            </Paper>
+              <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+                <Typography
+                    component="h1"
+                    variant="h4"
+                    align="center"
+                    margin={3}
+                    color="primary"
+                    >
+                    {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number[0]}
+                </Typography>
+                <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
+                  <EditCoreInformation/>
+                  <EditDevelopment/>
+                  <EditSkills/>
+                  <EditWellbeing/>
+                  <EditEquipment/>
+                </CharInfoContext.Provider>
+              </Paper>
             </Container>
 
             <Button

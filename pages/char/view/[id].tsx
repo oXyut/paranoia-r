@@ -17,6 +17,7 @@ import testCharInfoInitial from "../../../public/charInfoInitial.json";
 import firebaseURL from "../../../public/firebaseURL.json";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
+
 type typeCharInfo = typeof testCharInfoInitial;
 
 const CharacterView = () => {
@@ -160,10 +161,10 @@ const CharacterView = () => {
                     <Grid xs={3} p={1}>
                       <Button
                         variant="contained"
-                        color="error"
                         fullWidth
+                        sx={{backgroundColor: grey[900]}}
                       >
-                        削除
+                        秘匿情報の表示
                       </Button>
                     </Grid>
                   </Grid>

@@ -1,5 +1,6 @@
 import {Box, AppBar, Typography, Stack, Paper, Container, LinearProgress} from '@mui/material'
 import {Accordion, AccordionSummary, AccordionDetails} from '@mui/material'
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -20,9 +21,15 @@ type Props = {
     deleteCharInfoHandler: (id: string) => void,
 }
 
+type typeIsDeleteDict = {
+    id : string,
+    isDelete : boolean,
+}
+
 const CharList = (props: Props) => {
     const {charInfoList, isDeleting, deleteCharInfoHandler} = props;
     const [charInfoThemeList, setCharInfoThemeList] = useState({});
+    const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
     useEffect(() => {
       const dictColor = {
@@ -52,6 +59,40 @@ const CharList = (props: Props) => {
       setCharInfoThemeList(newCharInfoThemeList);
     }, [charInfoList]);
 
+
+    type deleteDialogPropsType = {
+        id: string,
+    }
+    // ダイアログのレンダリング
+    const DeleteDialog = (props: deleteDialogPropsType) => {
+        console.log("renderDialog");
+        return (
+            <Dialog
+                open={isOpenDialog}
+                onClose={() => {setIsOpenDialog(false)}}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"削除しますか？"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        削除したキャラクターは復元できません。
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={() => {setIsOpenDialog(false)}}
+                        >キャンセル</Button>
+                    <Button
+                        onClick={() => {
+                            deleteCharInfoHandler(props.id);
+                            setIsOpenDialog(false);
+                        }}
+                    >削除</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
 
     return (
         <div>
@@ -125,14 +166,15 @@ const CharList = (props: Props) => {
                         variant="contained"
                         color="error"
                         onClick={() => {
-                        console.log("削除ボタンが押されました");
-                        deleteCharInfoHandler(charInfo.id);
+                            console.log("削除ボタンが押されました")
+                            setIsOpenDialog(true);
                         }}
                     >
                         削除
                     </Button>
                 </Grid>
                 </Grid>
+                <DeleteDialog id={charInfo.id}/>
                 </Paper>
             ))}
             </Stack>

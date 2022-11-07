@@ -30,6 +30,7 @@ const CharacterEdit = () => {
     
     const postCharInfoURL = firebaseURL.root + "postCharInfo";
     const getCharInfoURL = firebaseURL.root + "getCharInfo";
+    const deleteCharInfoURL = firebaseURL.root + "deleteCharInfo";
 
     useEffect(() => {
       if (typeof id === "string") {
@@ -53,7 +54,7 @@ const CharacterEdit = () => {
       }
     }, []);
 
-    const saveCharInfo = async () => {
+    const saveCharInfoHandler = async () => {
         console.log("saveCharInfo");
         console.log(charInfo);
         if (typeof id === "string") {
@@ -111,7 +112,7 @@ const CharacterEdit = () => {
     }, [charInfo.information.CoreInformation.clearance]);
 
     const saveAndRoutingHandler = async () => {
-        await saveCharInfo().then(() => {
+        await saveCharInfoHandler().then(() => {
           router.push({
             pathname: "/char/view/[id]",
             query: { id: id },
@@ -119,6 +120,26 @@ const CharacterEdit = () => {
         });
     }
 
+    const deleteCharInfoHandler = async () => {
+        if (typeof id === "string") {
+          if (charInfo.lastUpdate === "保存されていません") {
+            // firebaseにデータがない場合は何もしない
+            console.log("データがありません");
+          } else {
+            // firebaseにデータがある場合はfirebaseから削除
+            await axios.post(deleteCharInfoURL, { id: id })
+            .then((res: AxiosResponse) => {
+                console.log(res.data);
+            })
+            .catch((err: AxiosError) => {
+                console.log(err);
+            })
+          }
+        router.push({
+          pathname: "/",
+        });
+      }
+    };
 
     return (
         <div>
@@ -163,7 +184,7 @@ const CharacterEdit = () => {
                 >
                 <Box p={2}>
                   <Grid container spacing={2} justifyContent="center" alignItems={"center"}>
-                    <Grid xs={6}>
+                    <Grid xs={3}>
                       <Typography variant="body2" color="text.primary" align="center">
                       </Typography>
                     </Grid>
@@ -171,19 +192,31 @@ const CharacterEdit = () => {
                       <Button
                         variant="contained"
                         fullWidth
-                        onClick={saveCharInfo}
+                        onClick={() => {console.log("秘匿情報の表示と編集")}}
+                        sx={{backgroundColor: grey[900]}}
+                        >
+                        秘匿情報を編集
+                      </Button>
+                    </Grid>
+                    <Grid xs={3}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        onClick={saveCharInfoHandler}
+                        sx={{backgroundColor: grey[900]}}
                         >
                         保存
                       </Button>
                     </Grid>
                     <Grid xs={3}>
-                    <Button
-                      variant="contained"
-                      fullWidth
-                      onClick={saveAndRoutingHandler}
-                    >
-                    閲覧モードへ
-                    </Button>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        onClick={saveAndRoutingHandler}
+                        sx={{backgroundColor: grey[900]}}
+                      >
+                      閲覧モードへ
+                      </Button>
                     </Grid>
                   </Grid>
                   </Box>

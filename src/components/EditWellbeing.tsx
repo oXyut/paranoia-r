@@ -89,7 +89,7 @@ const EditWellbeing = (props) => {
                     checked={charInfo.information.Wellbeing.Wounds.hurt}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const newCharInfo = {...charInfo};
-                      newCharInfo.information.Wellbeing.Wounds.hurt = e.target.checked;
+                      newCharInfo.information.Wellbeing.Wounds.injured = e.target.checked;
                       setCharInfo(newCharInfo);
                     }}
                   />
@@ -104,7 +104,7 @@ const EditWellbeing = (props) => {
                     checked={charInfo.information.Wellbeing.Wounds.hurt}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const newCharInfo = {...charInfo};
-                      newCharInfo.information.Wellbeing.Wounds.hurt = e.target.checked;
+                      newCharInfo.information.Wellbeing.Wounds.maimed = e.target.checked;
                       setCharInfo(newCharInfo);
                     }}
                   />
@@ -119,7 +119,7 @@ const EditWellbeing = (props) => {
                     checked={charInfo.information.Wellbeing.Wounds.hurt}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const newCharInfo = {...charInfo};
-                      newCharInfo.information.Wellbeing.Wounds.hurt = e.target.checked;
+                      newCharInfo.information.Wellbeing.Wounds.dead = e.target.checked;
                       setCharInfo(newCharInfo);
                     }}
                   />

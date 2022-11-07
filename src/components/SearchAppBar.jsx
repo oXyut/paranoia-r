@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Button } from '@mui/material'; 
 import { ClassNames } from '@emotion/react';
 import { NextLinkComposed } from './NextLinkComposed';
+import { useRouter } from 'next/router';
 // import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -56,6 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const router = useRouter();
+
   return (
     <>
     <Box sx={{ flexGrow: 1 }} p={3}>
@@ -80,7 +83,10 @@ export default function SearchAppBar() {
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   // /char/tag/tagnameに遷移
-                  window.location.href = '/char/tag/' + e.target.value;
+                  router.push({
+                    pathname: '/char/tag/[tag]',
+                    query: { tag: e.target.value },
+                  });
                 }
               }}
             />

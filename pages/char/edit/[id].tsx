@@ -1,4 +1,5 @@
 import { Container, Paper, Typography, Button, Box, AppBar, TextField } from "@mui/material";
+import {Snackbar, Alert} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
@@ -27,6 +28,7 @@ const CharacterEdit = () => {
     const router = useRouter();
     const { id } = router.query;
     const [charInfo, setCharInfo] = useState<typeCharInfoinitial>(charInfoinitial);
+    const [isSaved, setIsSaved] = useState<boolean>(false);
     
     const postCharInfoURL = firebaseURL.root + "postCharInfo";
     const getCharInfoURL = firebaseURL.root + "getCharInfo";
@@ -55,6 +57,7 @@ const CharacterEdit = () => {
     }, []);
 
     const saveCharInfoHandler = async () => {
+        setIsSaved(true);
         console.log("saveCharInfo");
         console.log(charInfo);
         if (typeof id === "string") {
@@ -70,7 +73,6 @@ const CharacterEdit = () => {
               console.log(err);
           })
         }
-
     }
     
 
@@ -175,6 +177,17 @@ const CharacterEdit = () => {
                 </CharInfoContext.Provider>
               </Paper>
             </Container>
+
+            <Snackbar
+              open={isSaved}
+              anchorOrigin={{ vertical: "bottom", horizontal:"left" }}
+              autoHideDuration={6000}
+              onClose={() => setIsSaved(false)}
+            >
+              <Alert onClose={() => setIsSaved(false)} severity="success" sx={{ width: '100%' }}>
+                保存しました
+              </Alert>
+            </Snackbar>
 
             <Box pt={5}>
               <AppBar

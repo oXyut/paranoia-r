@@ -9,11 +9,11 @@ import { Button } from "@mui/material";
 import { NextLinkComposed } from '../../../src/components/NextLinkComposed';
 import testCharInfoWithId from '../../../public/charInfoWithId.json';
 import { useEffect, useState, useContext } from 'react';
-import { v4 } from "uuid";
 import firebaseURL from "../../../public/firebaseURL.json";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useRouter } from "next/router";
-
+import CharList from '../../../src/components/CharList';
+import TopPageFooter from '../../../src/components/TopPageFooter';
 
 
 const TagSearch = () => {
@@ -24,18 +24,17 @@ const TagSearch = () => {
   const router = useRouter();
   const { tag } = router.query;
 
-  const [uuid, setUuid] = useState<string>(v4());
-
   // charInfoListを管理するuseState
   const [charInfoList, setCharInfoList] = useState<typeCharInfoWithId>([]);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   useEffect(() => {
     getTaggedCharInfoHandler();
   }, []);
 
-  const getTaggedCharInfoHandler = () => {
+  const getTaggedCharInfoHandler = async () => {
         // firebaseからtagに紐づくデータを取得
-        axios.post(getTaggedCharInfoURL, { tag: tag })
+        await axios.post(getTaggedCharInfoURL, { tag: tag })
         .then((res: AxiosResponse) => {
             console.log(res.data);
             setCharInfoList(res.data);
@@ -48,6 +47,7 @@ const TagSearch = () => {
   }
 
   const deleteCharInfoHandler = async (id: string) => {
+    setIsDeleting(true);
     console.log("deleteCharInfo");
     console.log(id);
     await axios.post(deleteCharInfoURL, { id: id })
@@ -57,7 +57,8 @@ const TagSearch = () => {
       .catch((err: AxiosError) => {
         console.log(err);
       })
-    setTimeout(()=>{getTaggedCharInfoHandler()}, 1000);
+    await getTaggedCharInfoHandler();
+    setIsDeleting(false);
   }
 
   const theme = createTheme({
@@ -71,35 +72,6 @@ const TagSearch = () => {
     },
   })
 
-  const [charInfoThemeList, setCharInfoThemeList] = useState({});
-
-  useEffect(() => {
-    const dictColor = {
-      "IR": "#000000",
-      "RED": red[900],
-      "ORANGE": deepOrange[500],
-      "YELLOW": yellow[800],
-      "GREEN": green[800],
-      "BLUE": blue[500],
-      "INDIGO": indigo[500],
-      "UV": grey[500],
-    }
-    let newCharInfoThemeList = {};
-    // idをキーにしてthemeを作成
-    for (const charInfo of charInfoList) {
-      newCharInfoThemeList[charInfo.id] = createTheme({
-        palette: {
-          primary: {
-            main: dictColor[charInfo.information.CoreInformation.clearance],
-          },
-          secondary: {
-            main: "#ffffff",
-          },
-        },
-      })
-    }
-    setCharInfoThemeList(newCharInfoThemeList);
-  }, [charInfoList]);
 
   return (
     <div>
@@ -107,117 +79,10 @@ const TagSearch = () => {
         <SearchAppBar/>
         <h1>タグ検索結果 : {tag}</h1>
 
-        <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
-        <Accordion defaultExpanded={true} variant="outlined">
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-        <Typography component="h3" variant="h6">
-          キャラクター一覧
-        </Typography>
+        <CharList charInfoList={charInfoList} deleteCharInfoHandler={deleteCharInfoHandler} isDeleting={isDeleting} />
 
-        </AccordionSummary>
-        <AccordionDetails>
-        {
-          (Object.keys(charInfoThemeList).length > 0) ? (
-        <Stack spacing={2}>
-          {charInfoList.map((charInfo) => (
-            <Paper variant="outlined" key={charInfo.id}>
-            <Grid container spacing={2} margin={1} p={1}>
-              <Grid xs={9}>
-                <ThemeProvider theme={charInfoThemeList[charInfo.id]}>
-                <Typography
-                  variant="h6"
-                  color={"primary"}
-                >
-                  {charInfo.information.CoreInformation.name}-{charInfo.information.CoreInformation.clearance}-{charInfo.information.CoreInformation.sector}-{charInfo.information.CoreInformation.number[0]}
-                </Typography>
-                </ThemeProvider>
-                <Grid container>
-                  <Grid xs={6}>
-                    <Typography variant="body1">
-                      最終更新日時 : {charInfo.lastUpdate}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid xs={1}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={NextLinkComposed}
-                    to={{pathname: "/char/view/"+ charInfo.id}}
-                  >
-                    閲覧
-                  </Button>
-              </Grid>
-              <Grid xs={1}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={NextLinkComposed}
-                    to={{pathname: "/char/edit/"+ charInfo.id}}
-                  >
-                    編集
-                  </Button>
-              </Grid>
-              <Grid xs={1}>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                      console.log("削除ボタンが押されました");
-                      deleteCharInfoHandler(charInfo.id);
-                    }}
-                  >
-                    削除
-                  </Button>
-              </Grid>
-            </Grid>
-            </Paper>
-          ))}
-        </Stack>
-        ) : (
-          <Typography variant="body1">
-            キャラクターが存在しません
-          </Typography>
-        )
-        }
-        </AccordionDetails>
-        </Accordion>
-        </Container>
+        <TopPageFooter />
 
-        <Box pt={5}>
-          <AppBar
-            position="fixed"
-            sx={{ top: 'auto', bottom: 0 }}
-            color="secondary"
-            >
-            <Box p={2}>
-              <Grid container spacing={2} justifyContent="center" alignItems={"center"}>
-                <Grid xs={6}>
-                  <Typography variant="body2" color="text.primary" align="center">
-                  </Typography>
-                </Grid>
-                <Grid xs={3}>
-                </Grid>
-                <Grid xs={3}>
-                  <Button
-                    component={NextLinkComposed}
-                    to={{
-                        pathname: "/char/edit/"+ uuid
-                    }}
-                    variant="contained"
-                >
-                    新しくキャラクターを作成
-                  </Button>
-                </Grid>
-              </Grid>
-              </Box>
-            </AppBar>
-          </Box>
 
       </ThemeProvider>
     </div>

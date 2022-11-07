@@ -110,6 +110,16 @@ const CharacterEdit = () => {
           }))
     }, [charInfo.information.CoreInformation.clearance]);
 
+    const saveAndRoutingHandler = async () => {
+        await saveCharInfo().then(() => {
+          router.push({
+            pathname: "/char/view/[id]",
+            query: { id: id },
+          });
+        });
+    }
+
+
     return (
         <div>
             <ThemeProvider theme={theme}>
@@ -168,10 +178,9 @@ const CharacterEdit = () => {
                     </Grid>
                     <Grid xs={3}>
                     <Button
-                      component={NextLinkComposed}
-                      to={{pathname: "/char/view/"+id}}
                       variant="contained"
                       fullWidth
+                      onClick={saveAndRoutingHandler}
                     >
                     閲覧モードへ
                     </Button>

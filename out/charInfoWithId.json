@@ -3,7 +3,12 @@
         "id": "test-id-1",
         "tag": "test-tag",
         "lastUpdate": "",
+        "password": "test-password",
         "information":{
+            "Secret": {
+                "society": "イルミナティ",
+                "mutant": "テレパシー"
+            },
             "CoreInformation": {
             "name": "ADAM",
             "clearance": "UV",

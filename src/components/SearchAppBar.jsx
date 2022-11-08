@@ -73,7 +73,6 @@ export default function SearchAppBar() {
         >
         Paranoia-R
         </Button>
-          <div style={{ flexGrow: 1 }}></div>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

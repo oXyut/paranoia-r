@@ -11,6 +11,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 
 import charInfoinitial from "../../../public/charInfoInitial.json";
 import firebaseURL from "../../../public/firebaseURL.json";
+import EditSecret from "../../../src/components/EditSecret";
 import EditCoreInformation from "../../../src/components/EditCoreInformation";
 import EditDevelopment from "../../../src/components/EditDevelopment";
 import EditSkills from "../../../src/components/EditSkills";
@@ -29,6 +30,8 @@ const CharacterEdit = () => {
     const { id } = router.query;
     const [charInfo, setCharInfo] = useState<typeCharInfoinitial>(charInfoinitial);
     const [isSaved, setIsSaved] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>("");
+    const [isPasswordCorrect, setIsPasswordCorrect] = useState<boolean>(false);
     
     const postCharInfoURL = firebaseURL.root + "postCharInfo";
     const getCharInfoURL = firebaseURL.root + "getCharInfo";
@@ -55,6 +58,15 @@ const CharacterEdit = () => {
           })
       }
     }, []);
+
+    //パスワードが正しいかチェック
+    const checkPassword = () => {
+      if (password === charInfo.password) {
+        setIsPasswordCorrect(true);
+      } else {
+        setIsPasswordCorrect(false);
+      }
+    }
 
     const saveCharInfoHandler = async () => {
         setIsSaved(true);
@@ -169,6 +181,7 @@ const CharacterEdit = () => {
                     onChange={(e) => setCharInfo(charInfo => ({ ...charInfo, tag: e.target.value }))}
                 />
                 <CharInfoContext.Provider value={{charInfo: charInfo, setCharInfo: setCharInfo}}>
+                  {(isPasswordCorrect || charInfo.password.length === 0) ? (<EditSecret/>):(null)}
                   <EditCoreInformation/>
                   <EditDevelopment/>
                   <EditSkills/>
@@ -180,7 +193,7 @@ const CharacterEdit = () => {
 
             <Snackbar
               open={isSaved}
-              anchorOrigin={{ vertical: "bottom", horizontal:"left" }}
+              anchorOrigin={{ vertical: "top", horizontal:"right" }}
               autoHideDuration={6000}
               onClose={() => setIsSaved(false)}
             >
@@ -198,14 +211,20 @@ const CharacterEdit = () => {
                 <Box p={2}>
                   <Grid container spacing={2} justifyContent="center" alignItems={"center"}>
                     <Grid xs={3}>
-                      <Typography variant="body2" color="text.primary" align="center">
-                      </Typography>
+                        <TextField
+                          label="パスワードを入力"
+                          variant="outlined"
+                          fullWidth
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          type="password"
+                        />
                     </Grid>
                     <Grid xs={3}>
                       <Button
                         variant="contained"
                         fullWidth
-                        onClick={() => {console.log("秘匿情報の表示と編集")}}
+                        onClick={checkPassword}
                         sx={{backgroundColor: grey[900]}}
                         >
                         秘匿情報を編集

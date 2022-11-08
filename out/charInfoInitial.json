@@ -2,7 +2,12 @@
     "id": "",
     "tag": "",
     "lastUpdate": "",
+    "password": "",
     "information":{
+        "Secret": {
+            "society": "所属なし",
+            "mutant": "ミュータントパワーなし"
+        },
         "CoreInformation": {
         "name": "",
         "clearance": "RED",

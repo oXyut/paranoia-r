@@ -53,7 +53,7 @@ const CharacterView = () => {
                 main: "#ffffff",
               },
             },
-          }))
+          }));
     }, [charInfo]);
 
     const handleDataLoad = () => {

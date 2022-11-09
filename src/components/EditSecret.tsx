@@ -10,17 +10,11 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {CharInfoContext} from '../../pages/char/edit/[id]';
-import defaultSecretSocieties from '../../public/dafaultSecretSocieties.json';
+import defaultSecretSocieties from '../../public/defaultSecretSocieties.json';
 import defaultMutantPowers from '../../public/defaultMutantPowers.json';
 
-
-
-
-const SmallFontBox = styled(Box)(({ theme }) => ({
-  fontSize: 14,
-}))
-
 type typeMutantPower = typeof defaultMutantPowers[0];
+type typeSecretSociety = typeof defaultSecretSocieties[0];
 
 const EditDevelopment = (props) => {
   // console.log(props);
@@ -28,11 +22,17 @@ const EditDevelopment = (props) => {
 
   const {charInfo, setCharInfo} = useContext(CharInfoContext);
   const [mutantPower, setMutatntPower] = useState<typeMutantPower>(defaultMutantPowers[0]);
+  const [secretSociety, setSecretSociety] = useState<typeSecretSociety>(defaultSecretSocieties[0]);
   const [tempPassword, setTempPassword] = useState<string>("");
 
   useEffect(() => {
     setMutatntPower(defaultMutantPowers.find((e) => e.name === charInfo.information.Secret.mutant));
     }, [charInfo.information.Secret.mutant]);
+
+  useEffect(() => {
+    setSecretSociety(defaultSecretSocieties.find((e) => e.name === charInfo.information.Secret.society));
+    }, [charInfo.information.Secret.society]);
+
 
     return (
       <>
@@ -82,12 +82,16 @@ const EditDevelopment = (props) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setCharInfo({...charInfo, information:{...charInfo.information, Secret:{...charInfo.information.Secret, society:e.target.value}}});}}
                     >
                         {defaultSecretSocieties.map((society) => {
-                            return <MenuItem value={society}>{society}</MenuItem>
+                            return <MenuItem value={society.name}>{society.name}</MenuItem>
                         })}
                     </Select>
                     </FormControl>
                 </Grid>
             </Grid>
+            <Box pl={3} pr={3} pb={3}>
+                <Typography>キーワード:{secretSociety.keyword.join(", ")}</Typography>
+                <Typography>{secretSociety.description}</Typography>
+            </Box>
             <Grid container spacing={1} sx={{margin: 1}}>
                 <Grid xs>
                     <FormControl fullWidth>

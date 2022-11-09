@@ -39,58 +39,58 @@ const ViewSkills = (props) => {
           {/* <Box sx={{ flexGrow: 1 }}> */}
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"運動"} value={Skills.Violence.athletics[0]} />
+              <UnderlinedBox name={"運動"} value={Skills.Violence.athletics[0] + Skills.Violence.athletics[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"科学"} value={Skills.Brains.science[0]} />
+              <UnderlinedBox name={"科学"} value={Skills.Brains.science[0] + Skills.Brains.science[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"ごまかし"} value={Skills.Chutzpah.bluff[0]} />
+              <UnderlinedBox name={"ごまかし"} value={Skills.Chutzpah.bluff[0] + Skills.Chutzpah.bluff[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"操作"} value={Skills.Mechanics.operate[0]} />
-            </Grid>
-          </Grid>
-          <Grid container spacing={1} sx={{margin: 1}}>
-            <Grid xs>
-              <UnderlinedBox name={"銃器"} value={Skills.Violence.guns[0]} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"心理学"} value={Skills.Brains.psychology[0]} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"魅惑"} value={Skills.Chutzpah.charm[0]} />
-            </Grid>
-            <Grid xs>
-              <UnderlinedBox name={"機械操作"} value={Skills.Mechanics.engineer[0]} />
+              <UnderlinedBox name={"操作"} value={Skills.Mechanics.operate[0] + Skills.Mechanics.operate[1]} />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"接近戦"} value={Skills.Violence.melee[0]} />
+              <UnderlinedBox name={"銃器"} value={Skills.Violence.guns[0] + Skills.Violence.guns[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"官僚主義"} value={Skills.Brains.bureaucracy[0]} />
+              <UnderlinedBox name={"心理学"} value={Skills.Brains.psychology[0] + Skills.Brains.psychology[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"威圧"} value={Skills.Chutzpah.intimidate[0]} />
+              <UnderlinedBox name={"魅惑"} value={Skills.Chutzpah.charm[0] + Skills.Chutzpah.charm[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"プログラム"} value={Skills.Mechanics.program[0]} />
+              <UnderlinedBox name={"機械操作"} value={Skills.Mechanics.engineer[0] + Skills.Mechanics.engineer[1]} />
             </Grid>
           </Grid>
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"巧投"} value={Skills.Violence.throw[0]} />
+              <UnderlinedBox name={"接近戦"} value={Skills.Violence.melee[0] + Skills.Violence.melee[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"アルファコンプレックス"} value={Skills.Brains.alpha_complex[0]} />
+              <UnderlinedBox name={"官僚主義"} value={Skills.Brains.bureaucracy[0] + Skills.Brains.bureaucracy[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"秘密行動"} value={Skills.Chutzpah.stealth[0]} />
+              <UnderlinedBox name={"威圧"} value={Skills.Chutzpah.intimidate[0] + Skills.Chutzpah.intimidate[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"爆破"} value={Skills.Mechanics.demolitions[0]} />
+              <UnderlinedBox name={"プログラム"} value={Skills.Mechanics.program[0] + Skills.Mechanics.program[1]} />
+            </Grid>
+          </Grid>
+          <Grid container spacing={1} sx={{margin: 1}}>
+            <Grid xs>
+              <UnderlinedBox name={"巧投"} value={Skills.Violence.throw[0] + Skills.Violence.throw[1]} />
+            </Grid>
+            <Grid xs>
+              <UnderlinedBox name={"アルファコンプレックス"} value={Skills.Brains.alpha_complex[0] + Skills.Brains.alpha_complex[1]} />
+            </Grid>
+            <Grid xs>
+              <UnderlinedBox name={"秘密行動"} value={Skills.Chutzpah.stealth[0] + Skills.Chutzpah.stealth[1]} />
+            </Grid>
+            <Grid xs>
+              <UnderlinedBox name={"爆破"} value={Skills.Mechanics.demolitions[0] + Skills.Mechanics.demolitions[1]} />
             </Grid>
           </Grid>
         {/* </Box> */}

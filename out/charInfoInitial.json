@@ -5,7 +5,7 @@
     "password": "",
     "information":{
         "Secret": {
-            "society": "所属なし",
+            "society": "所属結社なし",
             "mutant": "ミュータントパワーなし"
         },
         "CoreInformation": {

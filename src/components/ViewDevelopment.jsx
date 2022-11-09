@@ -55,16 +55,16 @@ const ViewDevelopment = (props) => {
 
           <Grid container spacing={1} sx={{margin: 1}}>
             <Grid xs>
-              <UnderlinedBox name={"暴力"} value={Development.Stats.violence.join(" + ")} />
+              <UnderlinedBox name={"暴力"} value={Development.Stats.violence[0] + Development.Stats.violence[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"知力"} value={Development.Stats.brains.join(" + ")} />
+              <UnderlinedBox name={"知力"} value={Development.Stats.brains[0] + Development.Stats.brains[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah.join(" + ")} />
+              <UnderlinedBox name={"交渉力"} value={Development.Stats.chutzpah[0] + Development.Stats.chutzpah[1]} />
             </Grid>
             <Grid xs>
-              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics.join(" + ")} />
+              <UnderlinedBox name={"技術力"} value={Development.Stats.mechanics[0] + Development.Stats.mechanics[1]} />
             </Grid>
           </Grid>
         {/* </Box> */}

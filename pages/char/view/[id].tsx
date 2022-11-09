@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
 
-import { Grid, Button, Box, Rating, Paper, Container, Typography, AppBar } from "@mui/material";
+import { Grid, Button, Box, Rating, Paper, Container, Typography, AppBar, TextField } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
 
 import SearchAppBar from "../../../src/components/SearchAppBar";
-import ViewCoreInformation from "../../../src/components/ViewCoreInformation";
 import { NextLinkComposed } from "../../../src/components/NextLinkComposed";
+import ViewSecret from "../../../src/components/ViewSecret";
+import ViewCoreInformation from "../../../src/components/ViewCoreInformation";
 import ViewDevelopment from "../../../src/components/ViewDevelopment";
 import ViewSkills from "../../../src/components/ViewSkills";
 import ViewWellbeing from "../../../src/components/ViewWellbeing";
@@ -28,6 +29,8 @@ const CharacterView = () => {
 
     const [charInfo, setCharInfo] = useState<typeCharInfo>(testCharInfoInitial);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
+    const [isPasswordCorrect, setIsPasswordCorrect] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>("");
 
     useEffect(() => {
         const { id } = router.query;
@@ -83,6 +86,15 @@ const CharacterView = () => {
         },
       }));
 
+      //パスワードが正しいかチェック
+      const checkPassword = () => {
+        if (password === charInfo.password) {
+          setIsPasswordCorrect(true);
+        } else {
+          setIsPasswordCorrect(false);
+        }
+      }
+
 
     return (
         <div>
@@ -112,6 +124,7 @@ const CharacterView = () => {
                         {`タグ : ${charInfo.tag}`}
                     </Typography>
 
+                    {isPasswordCorrect? (<ViewSecret info={charInfo.information.Secret}/>):(null)}
                     <ViewCoreInformation info={charInfo.information.CoreInformation}/>
                     <ViewDevelopment info={charInfo.information.Development}/>
                     <ViewSkills info={charInfo.information.Skills}/>
@@ -135,8 +148,25 @@ const CharacterView = () => {
                 <Box p={2}>
                   <Grid container spacing={2} justifyContent="center" alignItems={"center"}>
                     <Grid xs={3} p={1}>
-                      <Typography variant="body2" color="text.primary" align="center">
-                      </Typography>
+                      <TextField
+                        label="パスワード"
+                        fullWidth
+                        type="password"
+                        variant="outlined"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                    </Grid>
+                    <Grid xs={3} p={1}>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        sx={{backgroundColor: grey[900]}}
+                        onClick={checkPassword}
+                      >
+                        秘匿情報の表示
+                      </Button>
                     </Grid>
                     <Grid xs={3} p={1}>
                       <Button
@@ -157,15 +187,6 @@ const CharacterView = () => {
                     >
                     編集モードへ
                     </Button>
-                    </Grid>
-                    <Grid xs={3} p={1}>
-                      <Button
-                        variant="contained"
-                        fullWidth
-                        sx={{backgroundColor: grey[900]}}
-                      >
-                        秘匿情報の表示
-                      </Button>
                     </Grid>
                   </Grid>
                   </Box>

@@ -74,7 +74,13 @@ export default function Home() {
     <div>
       <ThemeProvider theme={theme}>
         <SearchAppBar/>
-        <h1>パラノイアリブーテッド用キャラクターシート作成サイト</h1>
+        <Grid container spacing={2} p={1} sx={{padding: 2}}>
+          <Grid xs={12}>
+            <Typography variant="h4" component="div" sx={{textAlign: "center"}}>
+              Top
+            </Typography>
+          </Grid>
+        </Grid>
 
         <CharList charInfoList={charInfoList} deleteCharInfoHandler={deleteCharInfoHandler} isDeleting={isDeleting}/>
 

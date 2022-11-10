@@ -2,5 +2,7 @@
 // https://zenn.dev/sora_kumo/articles/e86bbf0291d4a7
 
 import App from 'next/app'
+import "../styles/global.css"
+
 App.getInitialProps = async () => ({ pageProps: {} })
 export default App

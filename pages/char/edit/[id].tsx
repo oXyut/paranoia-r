@@ -3,6 +3,9 @@ import {Snackbar, Alert} from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import SaveIcon from '@mui/icons-material/Save';
 import { useRouter } from "next/router";
 import SearchAppBar from "../../../src/components/SearchAppBar";
 import { NextLinkComposed } from "../../../src/components/NextLinkComposed";
@@ -17,6 +20,7 @@ import EditDevelopment from "../../../src/components/EditDevelopment";
 import EditSkills from "../../../src/components/EditSkills";
 import EditWellbeing from "../../../src/components/EditWellbeing";
 import EditEquipment from "../../../src/components/EditEquipment";
+import { Edit } from "@mui/icons-material";
 
 type typeCharInfoinitial = typeof charInfoinitial;
 
@@ -224,6 +228,7 @@ const CharacterEdit = () => {
                       <Button
                         variant="contained"
                         fullWidth
+                        startIcon={<EditIcon />}
                         onClick={checkPassword}
                         sx={{backgroundColor: grey[900]}}
                         >
@@ -234,6 +239,7 @@ const CharacterEdit = () => {
                       <Button
                         variant="contained"
                         fullWidth
+                        startIcon={<SaveIcon />}
                         onClick={saveCharInfoHandler}
                         sx={{backgroundColor: grey[900]}}
                         >
@@ -244,6 +250,7 @@ const CharacterEdit = () => {
                       <Button
                         variant="contained"
                         fullWidth
+                        startIcon={<VisibilityIcon />}
                         onClick={saveAndRoutingHandler}
                         sx={{backgroundColor: grey[900]}}
                       >

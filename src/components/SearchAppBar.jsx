@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button } from '@mui/material'; 
+import { Button, Stack } from '@mui/material'; 
 import { ClassNames } from '@emotion/react';
 import { NextLinkComposed } from './NextLinkComposed';
 import { useRouter } from 'next/router';
@@ -64,15 +64,22 @@ export default function SearchAppBar() {
     <Box sx={{ flexGrow: 1 }} p={3}>
       <AppBar position="fixed">
         <Toolbar>
-        <Button
-          component={NextLinkComposed}
-          to={{pathname: "/"}}
-          variant="text"
-          color="inherit"
-          fullWidth
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+          sx={{flexGrow: 1}}
         >
-        Paranoia-R
-        </Button>
+            <Button
+              component={NextLinkComposed}
+              to={{pathname: "/"}}
+              variant="text"
+              color="inherit"
+              size="large"
+            >
+            Paranoia-R キャラクターシートアーカイブス
+            </Button>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -90,6 +97,7 @@ export default function SearchAppBar() {
               }}
             />
           </Search>
+        </Stack>
         </Toolbar>
       </AppBar>
     </Box>

@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import { Grid, Button, Box, Rating, Paper, Container, Typography, AppBar, TextField } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import SaveIcon from '@mui/icons-material/Save';
+import OutputIcon from '@mui/icons-material/Output';
 
 import SearchAppBar from "../../../src/components/SearchAppBar";
 import { NextLinkComposed } from "../../../src/components/NextLinkComposed";
@@ -162,6 +166,7 @@ const CharacterView = () => {
                       <Button
                         variant="contained"
                         fullWidth
+                        startIcon={<VisibilityIcon />}
                         sx={{backgroundColor: grey[900]}}
                         onClick={checkPassword}
                       >
@@ -171,6 +176,7 @@ const CharacterView = () => {
                     <Grid xs={3} p={1}>
                       <Button
                         variant="contained"
+                        endIcon={<OutputIcon/>}
                         sx={{backgroundColor: grey[900]}}
                         fullWidth
                       >
@@ -179,6 +185,7 @@ const CharacterView = () => {
                     </Grid>
                     <Grid xs={3} p={1}>
                     <Button
+                      startIcon={<EditIcon/>}
                       component={NextLinkComposed}
                       to={{pathname: "/char/edit/"+id}}
                       variant="contained"

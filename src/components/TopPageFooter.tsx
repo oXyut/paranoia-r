@@ -3,6 +3,7 @@ import {Button, Box, AppBar, Typography, Stack, Paper, Container, LinearProgress
 import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState, useContext, createContext } from 'react';
 import { useRouter } from 'next/router'
+import CreateIcon from "@mui/icons-material/Create";
 
 const TopPageFooter = () => {
     const router = useRouter();
@@ -29,20 +30,20 @@ const TopPageFooter = () => {
                 >
                 <Box p={2}>
                 <Grid container spacing={2} justifyContent="center" alignItems={"center"}>
+                    <Grid xs={3}>
+                    </Grid>
                     <Grid xs={6}>
-                    <Typography variant="body2" color="text.primary" align="center">
-                    </Typography>
-                    </Grid>
-                    <Grid xs={3}>
-                    </Grid>
-                    <Grid xs={3}>
                     <Button
                         variant="contained"
                         color="primary"
+                        startIcon={<CreateIcon />}
                         onClick={createNewCharInfoHandler}
+                        fullWidth
                     >
                         新しくキャラクターを作成
                     </Button>
+                    </Grid>
+                    <Grid xs={3}>
                     </Grid>
                 </Grid>
                 </Box>

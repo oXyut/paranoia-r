@@ -5,6 +5,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Unstable_Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, deepOrange, yellow, green, blue, indigo, grey } from '@mui/material/colors';
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
 import { NextLinkComposed } from './NextLinkComposed';
 import { useEffect, useState, useContext } from 'react';
@@ -118,8 +121,8 @@ const CharList = (props: Props) => {
             <Stack spacing={2}>
             {charInfoList.map((charInfo) => (
                 <Paper variant="outlined" key={charInfo.id}>
-                <Grid container spacing={2} margin={1} p={1}>
-                <Grid xs={9}>
+                <Grid container spacing={1} margin={1} p={1}>
+                <Grid xs={7.5}>
                     <ThemeProvider theme={charInfoThemeList[charInfo.id]}>
                     <Typography
                     variant="h6"
@@ -129,42 +132,48 @@ const CharList = (props: Props) => {
                     </Typography>
                     </ThemeProvider>
                     <Grid container>
-                    <Grid xs={6}>
+                    <Grid xs={4}>
                         <Typography variant="body1">
                         タグ : {charInfo.tag}
                         </Typography>
                     </Grid>
-                    <Grid xs={6}>
+                    <Grid xs={8}>
                         <Typography variant="body1">
                         最終更新日時 : {charInfo.lastUpdate}
                         </Typography>
                     </Grid>
                     </Grid>
                 </Grid>
-                <Grid xs={1}>
+                <Grid xs={1.5}>
                     <Button
                         variant="contained"
                         color="primary"
+                        startIcon={<VisibilityIcon />}
+                        fullWidth
                         component={NextLinkComposed}
                         to={{pathname: "/char/view/"+ charInfo.id}}
                     >
                         閲覧
                     </Button>
                 </Grid>
-                <Grid xs={1}>
+                <Grid xs={1.5}>
                     <Button
                         variant="contained"
                         color="primary"
+                        fullWidth
+                        startIcon={<EditIcon />}
                         component={NextLinkComposed}
                         to={{pathname: "/char/edit/"+ charInfo.id}}
                     >
                         編集
                     </Button>
                 </Grid>
-                <Grid xs={1}>
+                <Grid xs={1.5}>
                     <Button
                         variant="contained"
                         color="error"
+                        startIcon={<DeleteIcon />}
+                        fullWidth
                         onClick={() => {
                             console.log("削除ボタンが押されました")
                             setIsOpenDialog(true);
